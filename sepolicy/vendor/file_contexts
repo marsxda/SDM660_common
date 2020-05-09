@@ -18,7 +18,6 @@
 /sys/devices/soc/caa0000\.qcom,jpeg/video4linux/video1(/.*)?   u:object_r:sysfs_graphics:s0
 /sys/devices/soc/caa4000\.qcom,fd/video4linux/video2(/.*)?     u:object_r:sysfs_graphics:s0
 /sys/devices/soc/ca0c000\.qcom,cci/ca0c000.qcom,cci:qcom,camera@0/video4linux/video4(/.*)?     u:object_r:sysfs_graphics:s0
-/(mnt/vendor)/persist/camera(/.*)?                            u:object_r:persist_camera_file:s0
 /sys/devices/virtual/laser(/.*)?                              u:object_r:sysfs_sensor:s0
 /sys/devices/virtual/input/input4(/.*)?                       u:object_r:sysfs_sensor:s0
 
@@ -40,7 +39,6 @@
 /sys/devices/soc/soc:fpc_fpc1020(/.*)?                        u:object_r:sysfs_fingerprint:s0
 /sys/devices/platform/egis_input(/.*)?                        u:object_r:sysfs_fingerprint:s0
 /sys/devices/soc/0.et320(/.*)?                                u:object_r:sysfs_fingerprint:s0
-/(mnt/vendor)/persist/egis(/.*)?                              u:object_r:fingerprint_data_file:s0
 /dev/esfp0                                                    u:object_r:tee_device:s0
 /data/vendor/misc/cutback(/.*)?                               u:object_r:vendor_radio_data_file:s0
 /data/vendor/fpc(/.*)?                                        u:object_r:fingerprint_data_file:s0
@@ -56,11 +54,13 @@
 # Charger
 /(vendor|system/vendor)/bin/charge_only_mode             u:object_r:charge_only_exec:s0
 
-# Persist mdm
-/(mnt/vendor)/persist/mdm(/.*)?                                         u:object_r:persist_mdm_file:s0
+# Persist
+/(mnt/vendor/persist|persist)(/.*)?                                     u:object_r:mnt_vendor_file:s0
+/(mnt/vendor/persist|persist)/battery(/.*)?                             u:object_r:persist_battery_file:s0
+/(mnt/vendor/persist|persist)/camera(/.*)?                              u:object_r:persist_camera_file:s0
+/(mnt/vendor/persist|persist)/egis(/.*)?                                u:object_r:fingerprint_data_file:s0
+/(mnt/vendor/persist|persist)/mdm(/.*)?                                 u:object_r:persist_modem_file:s0
 
-# Battery and healthd
-/(mnt/vendor)/persist/battery(/.*)?                               u:object_r:persist_battery_file:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-00/800f000\.qcom,spmi:qcom,pm660@0:qcom,qpnp-smb2/power_supply/battery(/.*)?      u:object_r:sysfs_healthd:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-00/800f000\.qcom,spmi:qcom,pm660@0:qcom,qpnp-smb2/power_supply/dc(/.*)?           u:object_r:sysfs_healthd:s0
 /sys/devices/soc/800f000\.qcom,spmi/spmi-0/spmi0-00/800f000\.qcom,spmi:qcom,pm660@0:qcom,qpnp-smb2/power_supply/main(/.*)?         u:object_r:sysfs_healthd:s0
